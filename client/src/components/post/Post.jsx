@@ -1,5 +1,5 @@
 import "./post.css";
-import { MoreVert } from "@material-ui/icons";
+import { MoreVert, Stop } from "@material-ui/icons";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
@@ -34,6 +34,9 @@ export default function Post({ post }) {
   };
   return (
     <div className="post">
+      <div className="stop-watch" hidden>
+        <span className="digits">{post.watchTime}</span>
+      </div>
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">

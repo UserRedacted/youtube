@@ -5,9 +5,11 @@ import {
   Room,
   EmojiEmotions,
   Cancel,
+  Timer,
 } from "@material-ui/icons";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import Stopwatch from "../stopwatch/Stopwatch";
 import axios from "axios";
 
 export default function Share() {
@@ -33,14 +35,25 @@ export default function Share() {
         await axios.post("/upload", data);
       } catch (err) {}
     }
+    if (!document.getElementById("stopwatchWrapper").hidden){
+      newPost.watchTime = document.getElementById("timerResult").innerText;
+    }
     try {
       await axios.post("/posts", newPost);
       window.location.reload();
     } catch (err) {}
   };
 
+  const stopwatchHandler = async (e) => {
+    var sw = document.getElementById("stopwatchWrapper");
+    sw.hidden = !sw.hidden;
+  };
+
   return (
     <div className="share">
+      <div id="stopwatchWrapper" hidden>
+        <Stopwatch id="shareWatch"/> 
+      </div>
       <div className="shareWrapper">
         <div className="shareTop">
           <img
@@ -78,6 +91,10 @@ export default function Share() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
+            <div className="shareOption" onClick={stopwatchHandler}>
+              <Timer htmlColor="orange" className="shareIcon" />
+              <span className="shareOptionText">Stopwatch</span>
+            </div>
             <div className="shareOption">
               <Label htmlColor="blue" className="shareIcon" />
               <span className="shareOptionText">Tag</span>
