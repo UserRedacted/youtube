@@ -10,7 +10,7 @@ import {
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Stopwatch from "../stopwatch/Stopwatch";
-import getLaps from "../stopwatch/Stopwatch";
+import {getLaps} from "../stopwatch/Stopwatch";
 import {concatTimerString} from "../stopwatch/Timer"
 import axios from "axios";
 
@@ -44,11 +44,10 @@ export default function Share() {
           return a + b;
         }, 0);
         newPost.watchTime = concatTimerString(sum);
-        for(let i = 0; i < laps.length; i++){
-          laps[i] = concatTimerString(laps[i]);
-        }
+        newPost.lapTimes = laps;
+
       } else {
-        newPost.watchTime = document.getElementById("digits").innerText;
+        newPost.watchTime = document.getElementById("timerResult").innerText;
       }
       //newPost.watchTime = document.getElementById("timerResult").innerText;
     }

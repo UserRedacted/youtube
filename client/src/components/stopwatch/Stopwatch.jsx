@@ -11,6 +11,9 @@ import {concatTimerString} from "./Timer"
 
 var laps = [];
 
+export const getLaps = () => {
+  return laps;
+} 
 
 function Stopwatch() {
   const [isActive, setIsActive] = useState(false);

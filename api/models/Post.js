@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
     },
     watchTime: {
-      type: Number,
+      type: String,
     },
     lapTimes: {
       type: Array,
