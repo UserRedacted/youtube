@@ -34,9 +34,6 @@ export default function Post({ post }) {
   };
   return (
     <div className="post">
-      <div className="stop-watch" hidden>
-        <span className="digits">{post.watchTime}</span>
-      </div>
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
@@ -59,6 +56,10 @@ export default function Post({ post }) {
           </div>
         </div>
         <div className="postCenter">
+          <div className="stop-watch">
+            <span className="watchHeader">{post.watchTime !== undefined ? user.username + " shared a stopwatch time" : ""}</span>
+            <span className="digits">{post.watchTime}</span>
+          </div>
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={PF + post.img} alt="" />
         </div>

@@ -17,7 +17,6 @@ mongoose.connect(
   process.env.MONGO_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
-    console.log(process.env.MONGO_URL);
     console.log("Connected to MongoDB");
   }
 );

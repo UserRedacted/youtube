@@ -92,7 +92,7 @@ export default function Share() {
               />
             </label>
             <div className="shareOption" onClick={stopwatchHandler}>
-              <Timer htmlColor="orange" className="shareIcon" />
+              <Timer htmlColor="purple" className="shareIcon" />
               <span className="shareOptionText">Stopwatch</span>
             </div>
             <div className="shareOption">
