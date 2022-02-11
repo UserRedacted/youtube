@@ -14,7 +14,11 @@ const PostSchema = new mongoose.Schema(
       type: String,
     },
     watchTime: {
-      type: String,
+      type: Number,
+    },
+    lapTimes: {
+      type: Array,
+      default: [],
     },
     likes: {
       type: Array,

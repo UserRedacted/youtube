@@ -6,13 +6,17 @@ import React, { useState } from "react";
 import "./stopwatch.css";
 import Timer from "./Timer";
 import ControlButtons from "./ControlButtons";
-  
+import {concatTimerString} from "./Timer"
+
+
+var laps = [];
+
 
 function Stopwatch() {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [time, setTime] = useState(0);
-   
+
   React.useEffect(() => {
     let interval = null;
   
@@ -38,12 +42,22 @@ function Stopwatch() {
   };
   
   const handleReset = () => {
+    laps = [];
     setIsActive(false);
     setTime(0);
+    document.getElementById("timerLaps").innerText = "";
   };
   
+  const handleLap = () => {
+    laps.push(time);
+    var text = document.getElementById("timerLaps");
+    text.innerText += concatTimerString(time) +"\n";
+    setTime(0);
+
+  };
+
   return (
-    <div className="stop-watch">
+    <div className="stopwatch">
       <Timer time={time} />
       <ControlButtons
         active={isActive}
@@ -51,9 +65,11 @@ function Stopwatch() {
         handleStart={handleStart}
         handlePauseResume={handlePauseResume}
         handleReset={handleReset}
+        handleLap={handleLap}
       />
+      <p id="timerLaps" className="lapList"></p>
     </div>
   );
 }
-  
+
 export default Stopwatch;

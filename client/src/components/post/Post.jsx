@@ -5,6 +5,7 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import {concatTimerString} from "../stopwatch/Timer"
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
@@ -32,6 +33,15 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
+  function formatLaps(laps){
+    let output = "";
+    for(let i = 0; i < laps.length; i++){
+      output += concatTimerString(laps[i]) + "\n";
+    }
+    return output;
+  }
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -56,9 +66,10 @@ export default function Post({ post }) {
           </div>
         </div>
         <div className="postCenter">
-          <div className="stop-watch">
+          <div className="stopwatch">
             <span className="watchHeader">{post.watchTime !== undefined ? user.username + " shared a stopwatch time" : ""}</span>
-            <span className="digits">{post.watchTime}</span>
+            <span className="digits">{post.watchTime !== undefined ? concatTimerString(post.watchTime) : ""} </span>
+            <span className="lapList">{formatLaps(post.lapTimes)} </span>
           </div>
           <span className="postText">{post?.desc}</span>
           <img className="postImg" src={PF + post.img} alt="" />

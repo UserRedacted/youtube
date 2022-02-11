@@ -20,7 +20,11 @@ export default function ControlButtons(props) {
       </div>
       <div className="btn btn-one" 
            onClick={props.handlePauseResume}>
-        {props.isPaused ? "Resume" : "Pause"}
+        {props.isPaused ? "Resume" : "Stop"}
+      </div>
+      <div className="btn btn-one" 
+           onClick={props.handleLap}>
+        Lap
       </div>
     </div>
   );

@@ -10,6 +10,8 @@ import {
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Stopwatch from "../stopwatch/Stopwatch";
+import getLaps from "../stopwatch/Stopwatch";
+import {concatTimerString} from "../stopwatch/Timer"
 import axios from "axios";
 
 export default function Share() {
@@ -36,7 +38,19 @@ export default function Share() {
       } catch (err) {}
     }
     if (!document.getElementById("stopwatchWrapper").hidden){
-      newPost.watchTime = document.getElementById("timerResult").innerText;
+      let laps = getLaps();
+      if(laps.length > 0){
+        let sum = laps.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+        newPost.watchTime = concatTimerString(sum);
+        for(let i = 0; i < laps.length; i++){
+          laps[i] = concatTimerString(laps[i]);
+        }
+      } else {
+        newPost.watchTime = document.getElementById("digits").innerText;
+      }
+      //newPost.watchTime = document.getElementById("timerResult").innerText;
     }
     try {
       await axios.post("/posts", newPost);
